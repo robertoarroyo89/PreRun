@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>PreRun | Prepárate para tu carrera</title>
+  <meta name="description" content="PreRun te ayuda a preparar tu carrera con checklist, calendario y motivación deportiva." />
+  <meta name="theme-color" content="#ff5a55" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/icon-192.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="light">
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <img src="icons/logo.svg" alt="Logo PreRun" class="brand-logo" />
+        <div>
+          <p class="eyebrow">PreRun</p>
+          <h1>Prepárate antes de correr</h1>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Cambiar modo">🌗</button>
+    </header>
+
+    <main>
+      <section class="hero-card">
+        <div>
+          <p class="eyebrow uppercase">Tu ritual pre-carrera</p>
+          <h2>Checklist deportivo, calendario y motivación.</h2>
+          <p class="hero-copy">Elige tu distancia, deja todo listo y siente la confianza antes de cruzar la línea de salida.</p>
+        </div>
+        <div class="hero-actions">
+          <button id="startOnboarding" class="btn btn-primary">Inicia tu preparación</button>
+          <button id="syncDate" class="btn btn-secondary">Sincronizar fecha</button>
+          <button id="installBtn" class="btn btn-secondary hidden">Instalar PreRun</button>
+        </div>
+      </section>
+
+      <section class="layout-grid">
+        <article class="panel checklist-panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Checklist</p>
+              <h3>Puntos clave antes de la carrera</h3>
+            </div>
+            <span id="completionBadge" class="badge">0/8 completados</span>
+          </div>
+
+          <div id="checklist" class="checklist">
+            <label class="check-item"><input type="checkbox" data-item="Desayuno"> Desayuno equilibrado</label>
+            <label class="check-item"><input type="checkbox" data-item="Outfit"> Ropa técnica lista</label>
+            <label class="check-item"><input type="checkbox" data-item="Dorsal"> Dorsal colocado</label>
+            <label class="check-item"><input type="checkbox" data-item="Calcetines"> Calcetines de carrera</label>
+            <label class="check-item"><input type="checkbox" data-item="Zapatillas"> Zapatillas atadas</label>
+            <label class="check-item"><input type="checkbox" data-item="Reloj"> Reloj inteligente cargado</label>
+            <label class="check-item"><input type="checkbox" data-item="Hidratacion"> Hidratación lista</label>
+            <label class="check-item"><input type="checkbox" data-item="Warmup"> Calentamiento breve</label>
+          </div>
+
+          <div id="motivationalCard" class="motivational-card hidden">
+            <p class="eyebrow">¡Bien hecho!</p>
+            <h4 id="phraseText">Tu cuerpo está preparado, tu mente también.</h4>
+            <button id="nextMotivation" class="btn btn-tertiary">Otra frase</button>
+          </div>
+        </article>
+
+        <article class="panel calendar-panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Calendario</p>
+              <h3>Tu próxima carrera</h3>
+            </div>
+            <span id="deviceDate" class="date-chip">Fecha del móvil</span>
+          </div>
+
+          <div class="calendar-card">
+            <div class="calendar-sync">
+              <p>Agrega tus carreras y sincronízalas con Google Calendar o iCal.</p>
+              <button id="addRaceBtn" class="btn btn-primary">Agregar carrera</button>
+            </div>
+            <ul id="eventList" class="event-list">
+              <li class="event-empty">Aún no hay carreras registradas.</li>
+            </ul>
+          </div>
+
+          <div class="calendar-actions">
+            <button id="openExport" class="btn btn-secondary">Exportar evento</button>
+            <button id="openGoogle" class="btn btn-tertiary">Abrir en Google Calendar</button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <div id="onboardingModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-label="Onboarding PreRun">
+      <div class="modal-card">
+        <button id="closeModal" class="close-btn" aria-label="Cerrar">×</button>
+        <div class="modal-header">
+          <p class="eyebrow">Bienvenido a PreRun</p>
+          <h2>Vamos a conocerte mejor</h2>
+          <p>Responde estas preguntas y descubre una preparación tranquila, segura y personalizada para tu próxima carrera.</p>
+        </div>
+        <form id="onboardForm" class="onboard-form">
+          <fieldset>
+            <legend>¿Qué distancia estás preparando?</legend>
+            <label><input type="radio" name="distance" value="5K" checked> 5K</label>
+            <label><input type="radio" name="distance" value="10K"> 10K</label>
+            <label><input type="radio" name="distance" value="15K"> 15K</label>
+            <label><input type="radio" name="distance" value="21K"> 21K</label>
+            <label><input type="radio" name="distance" value="42K"> 42K</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>¿Cómo te gustaría sentirte el día de la carrera?</legend>
+            <label><input type="radio" name="feeling" value="Confiado" checked> Confiado</label>
+            <label><input type="radio" name="feeling" value="Listo"> Listo</label>
+            <label><input type="radio" name="feeling" value="Tranquilo"> Tranquilo</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>¿Cuál es tu objetivo principal?</legend>
+            <label><input type="radio" name="goal" value="Disfrutar" checked> Disfrutar la carrera</label>
+            <label><input type="radio" name="goal" value="Mejorar marca"> Mejorar mi marca personal</label>
+            <label><input type="radio" name="goal" value="Completar"> Completar la distancia</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Selecciona tu nivel</legend>
+            <label><input type="radio" name="level" value="Principiante" checked> Principiante</label>
+            <label><input type="radio" name="level" value="Intermedio"> Intermedio</label>
+            <label><input type="radio" name="level" value="Avanzado"> Avanzado</label>
+          </fieldset>
+
+          <div class="onboard-note">
+            <p>PreRun te acompaña paso a paso. Siéntete tranquilo: cada elección es un paso hacia una carrera más segura.</p>
+          </div>
+
+          <div class="form-footer">
+            <button type="submit" class="btn btn-primary">Comenzar</button>
+            <button type="button" id="skipOnboarding" class="btn btn-secondary">Saltar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
